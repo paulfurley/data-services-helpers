@@ -267,7 +267,7 @@ def test_passes_headers_through(mock_requests_get):
 
 @patch('time.sleep')
 @patch('dshelpers.requests.get')
-def test_override_timeout(mock_time_sleep, mock_requests_get):
+def test_override_timeout(mock_requests_get, mock_time_sleep):
     fake_response = requests.Response()
     fake_response.status_code = 200
     fake_response._content = str("Hello")
@@ -277,7 +277,7 @@ def test_override_timeout(mock_time_sleep, mock_requests_get):
 
 @patch('time.sleep')
 @patch('dshelpers.requests.get')
-def NOPE_get_response_object_on_good_site(mock_requests_get, mock_sleep):
+def test_get_response_object_on_good_site(mock_requests_get, mock_sleep):
     fake_response = requests.Response()
     fake_response.status_code = 200
     fake_response._content = str("Hello")
