@@ -260,6 +260,13 @@ def test_rate_limit_sleeps_up_to_correct_period(mock_sleep):
     mock_sleep.assert_called_once_with(_HIT_PERIOD - 1.5)
 
 
+@patch('dshelpers.requests_cache.install_cache')
+def test_set_cache_methods(mock_install_cache):
+    install_cache(post=True)
+    mock_install_cache.assert_called_with(expire_after=43200,
+                                          allowable_methods=[u'GET', u'POST'])
+
+
 @patch('time.sleep')
 @patch('dshelpers.requests.request')
 def test_passes_headers_through(mock_request, mock_time_sleep):
