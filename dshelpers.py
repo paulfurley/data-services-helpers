@@ -84,13 +84,16 @@ def _get_most_recent_record(table_name, column):
     return result[0]['most_recent']
 
 
-def install_cache(expire_after=12 * 3600):
+def install_cache(expire_after=12 * 3600, post=False):
     """
     Patches the requests library with requests_cache.
     """
+    allowable_methods = ('GET')
+    if post:
+        allowable_methods.append("POST")
     requests_cache.install_cache(
         expire_after=expire_after,
-        allowable_methods=('GET',))
+        allowable_methods=allowable_methods)
 
 
 def download_url(url, back_off=True, **kwargs):
